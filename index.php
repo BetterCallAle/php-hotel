@@ -1,5 +1,8 @@
 <?php
 
+    $user_choice = $_GET["park-select"] ?? "";
+    var_dump($user_choice);
+
     $hotels = [
 
         [
@@ -40,6 +43,38 @@
 
     ];
 
+    //Create an empty array that will be the output
+    $hotels_output = [];
+    //Create the array for no parking choice
+    $hotel_no_parking = [];
+    //Create the array for parking choice
+    $hotel_parking = [];
+
+    //Cycle the Hotels array
+    foreach($hotels as $hotel){
+        //If parking is true
+        if($hotel['parking']){
+            //push the element in the parking array
+            $hotel_parking[] = $hotel;
+        } else {
+            //Else push the element in the no parking array
+            $hotel_no_parking[] = $hotel;
+        }
+    }
+
+    //If GET === parking 
+    if($user_choice === "parking"){
+        //Show the parking array
+        $hotels_output = $hotel_parking;
+    //Else if GET === no parking
+    } elseif($user_choice === "no-parking"){
+        //Show the no parking array
+        $hotels_output = $hotel_no_parking;
+    } else {
+        //Else show all the elements
+        $hotels_output = $hotels;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -54,9 +89,24 @@
 </head>
 <body>
     <main>
-        <section id="hotel-data">
+        <section id="form-section" class="py-5">
+            <div class="container">
+                <form action="index.php" method="GET">
+                    <select name="park-select" id="park-select">
+                        <option value="both">Entrambi</option>
+                        <option value="parking">Con Parcheggio</option>
+                        <option value="no-parking">Senza Parcheggio</option>
+                    </select>
+
+                    <button type="submit">Invia</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="hotel-data" class="py-5">
             <div class="container">
                 <table class="table table-bordered text-center">
+                    <!-- Table Head -->
                     <thead>
                         <tr>
                             <th scope="col">Nome Hotel</th>
@@ -66,8 +116,11 @@
                             <th scope="col">Distanza dal Centro</th>
                         </tr>
                     </thead>
+                    <!-- /Table Head -->
+
+                    <!-- /Table Body -->
                     <tbody>
-                        <?php foreach($hotels as $hotel){ ?>
+                        <?php foreach($hotels_output as $hotel){ ?>
                             <tr>
                                 <td>
                                     <?php echo $hotel['name']; ?>
@@ -94,6 +147,7 @@
                             </tr>
                         <?php } ?>
                     </tbody>
+                    <!-- Table Body -->
                 </table>
             </div>
         </section>
