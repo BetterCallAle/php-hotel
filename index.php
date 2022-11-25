@@ -51,6 +51,23 @@
     <title>Document</title>
 </head>
 <body>
+    <ul>
+        <?php foreach($hotels as $hotel) { ?>
+
+            <li>
+
+            <?php 
+               echo "<h3>" . $hotel['name'] . "</h3>";
+               echo "<p>" . $hotel['description'] . "</p>";
+               echo "<p>" . $hotel['parking'] . "</p>";
+               echo "<p>" . $hotel['vote'] . "</p>";
+               echo "<p>" . $hotel['distance_to_center'] . "</p>";
+            ?>
+            
+            </li>
+
+        <?php } ?>
+    </ul>
     
 </body>
 </html>
