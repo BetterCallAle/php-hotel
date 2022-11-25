@@ -49,25 +49,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <ul>
-        <?php foreach($hotels as $hotel) { ?>
-
-            <li>
-
-            <?php 
-               echo "<h3>" . $hotel['name'] . "</h3>";
-               echo "<p>" . $hotel['description'] . "</p>";
-               echo "<p>" . $hotel['parking'] . "</p>";
-               echo "<p>" . $hotel['vote'] . "</p>";
-               echo "<p>" . $hotel['distance_to_center'] . "</p>";
-            ?>
-            
-            </li>
-
-        <?php } ?>
-    </ul>
+    <main>
+        <section id="hotel-data">
+            <div class="container">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome Hotel</th>
+                            <th scope="col">Descrizione</th>
+                            <th scope="col">Ha il parcheggio?</th>
+                            <th scope="col">Voto</th>
+                            <th scope="col">Distanza dal Centro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($hotels as $hotel){ ?>
+                            <tr>
+                                <td>
+                                    <?php echo $hotel['name']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['description']; ?>
+                                </td>
+                                <td>
+                                    <?php 
+                                        if($hotel['parking']){
+                                            echo "Si";
+                                        } else {
+                                            echo "No";
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['vote']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['distance_to_center']; ?>
+                                    <span>km</span>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
     
 </body>
 </html>
